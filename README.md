@@ -1,68 +1,54 @@
-# rauchg-blog-template
+# blog-sanity-nextjs-experiment
 
-A minimalist blog template inspired by [rauchg's blog](https://rauchg.com). Built with Next.js 16, MDX, Tailwind CSS, and Geist font.
+> **Archived.** This repo documents a completed experiment. It is read-only.
 
-## Features
+A personal blog experiment wiring **Next.js 16 + Sanity CMS + Vercel** together. Built in early 2026 to evaluate whether a headless CMS workflow would fit for personal blogging.
 
-- **Next.js 16** - App Router with Turbopack
-- **MDX** - Write posts in Markdown with React components
-- **Tailwind CSS** - Utility-first styling
-- **Geist Font** - Clean typography from Vercel
-- **Dark Mode** - Automatic theme switching
-- **TypeScript** - Full type safety
-- **Vercel Ready** - One-click deploy
+## What This Was
 
-## Quick Start
+- **Frontend:** Next.js 16 (App Router), Tailwind CSS v4, TypeScript, Geist font
+- **CMS:** [Sanity](https://sanity.io) — content hosted in Sanity's cloud, edited via an embedded Studio at `/studio`
+- **Deployment:** Vercel (with Web Analytics)
+- **Sanity plugins installed:** `@sanity/code-input`, `@sanity/table`, `@sanity/assist` (AI), `sanity-plugin-media`, `sanity-plugin-iframe-pane` (live preview), `sanity-plugin-markdown`
 
-1. Click "Use this template" on GitHub
-2. Clone your new repo
-3. Install dependencies:
-   ```bash
-   pnpm install
-   ```
-4. Start the dev server:
-   ```bash
-   pnpm dev
-   ```
-5. Open [http://localhost:3000](http://localhost:3000)
+The studio was embedded directly in the Next.js app and served from `/studio`, with posts fetched from Sanity's API at render time.
 
-## Adding Posts
+## Why It's Archived
 
-1. Create a folder in `app/(post)/your-post-slug/`
-2. Add a `page.mdx` file:
-   ```mdx
-   # Your Post Title
+After hands-on use, the Sanity CMS workflow isn't the right fit for personal blogging:
 
-   Your content here...
-   ```
-3. Update `app/posts.json`:
-   ```json
-   [
-     {
-       "id": "your-post-slug",
-       "date": "Jan 1, 2025",
-       "title": "Your Post Title"
-     }
-   ]
-   ```
+- **Content lives in the cloud, not in the repo.** Sanity stores content in their hosted database. Posts aren't files — they're API responses. No local editing without network access.
+- **Studio friction.** Even for local development, you need to register the studio with Sanity's cloud (CORS whitelist) before it can access content.
+- **Overhead for solo use.** Schema definitions, GROQ queries, API tokens, plugin configuration — worthwhile for teams, overkill for one person writing occasional posts.
+- **Preferred workflow:** Hugo + plain Markdown files, edited in Obsidian or an IDE, committed directly to the repo. Zero external services, zero CMS overhead.
 
-## Customization
+## Screenshots
 
-- **Site title**: Edit `app/layout.tsx`
-- **Social links**: Edit `app/page.tsx` (X/Twitter link)
-- **Styles**: Edit `app/globals.css`
-- **MDX components**: Edit `mdx-components.tsx`
+### Blog home (post listing)
 
-## Deploy
+![Blog home page](docs/screenshots/blog-home.png)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ethanolivertroy/rauchg-blog-template)
+### Sample post (Sanity-rendered content)
 
-Or connect your GitHub repo to [Vercel](https://vercel.com) for automatic deployments.
+![Blog post page](docs/screenshots/blog-post.png)
 
-## Credits
+### Sanity Studio (embedded CMS editor)
 
-Inspired by [rauchg/blog](https://github.com/rauchg/blog) by Guillermo Rauch (CEO of Vercel).
+The studio requires registering with Sanity's cloud even for local development — illustrating the CMS overhead.
 
-## License
+![Sanity Studio](docs/screenshots/sanity-studio.png)
 
-MIT
+## What's Next
+
+Sticking with the Hugo-based workflow for the personal blog. Might try [Astro](https://astro.build) in the future as a static-site alternative with better component flexibility.
+
+## Tech Stack (for reference)
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router) |
+| CMS | Sanity v3 |
+| Styling | Tailwind CSS v4 |
+| Fonts | Geist (Vercel) |
+| Deployment | Vercel |
+| Analytics | Vercel Web Analytics |
